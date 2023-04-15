@@ -10,7 +10,7 @@ namespace ControleDeEstoque.Web.Controllers
     {
         // GET: Operacao
         [Authorize]
-        public ActionResult EntredaEstoque()
+        public ActionResult EntradaEstoque()
         {
             return View();
         }

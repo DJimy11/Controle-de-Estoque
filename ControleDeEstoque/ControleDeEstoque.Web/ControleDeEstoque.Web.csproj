@@ -180,7 +180,7 @@
     <Content Include="Views\Cadastro\Usuário.cshtml" />
     <Content Include="Views\Grafico\PerdaMes.cshtml" />
     <Content Include="Views\Grafico\EntradaSaidaMes.cshtml" />
-    <Content Include="Views\Operacao\EntredaEstoque.cshtml" />
+    <Content Include="Views\Operacao\EntradaEstoque.cshtml" />
     <Content Include="Views\Operacao\Inventario.cshtml" />
     <Content Include="Views\Operacao\SaidaEstoque.cshtml" />
     <Content Include="Views\Operacao\LancPerdaProduto.cshtml" />
