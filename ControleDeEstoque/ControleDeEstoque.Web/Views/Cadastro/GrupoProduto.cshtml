@@ -2,14 +2,32 @@
 @{
     ViewBag.title = "cadastro de grupos de produtos";
  }
+<style>
+    #grid_cadastro> thead > tr th:nth-child(2){
+        width:110px;
+    }
+    #grid_cadastro > thead > tr th:nth-child(3) {
+        width: 200px;
+    }
+    #cadastro{
+        width:70px;
+        margin:0 auto;
+    }
+    #cadastro_cabecalho{
+        border-bottom:1px #dddddd solid;
+    }
+    #cadastro_conteudo{
+        margin-top: 20px;
+    }
+    #cabecalho_grid{
+        margin-bottom:20px;
+    }
+</style>
 <div id="cadastro">
     <section id="cadastro_cabecalho">
      <h1>@ViewBag.title</h1>
     </section>
     <section id="cadastro_conteudo">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="box">
                     <div id="cabecalho_grid" class="row">
                         <a id="btn_incluir" class="btn_sucesso" role="button"><i class="glyphicon glyphicon-plus"></i>excluir</a>
 
@@ -44,12 +62,20 @@
 
                         </div>
                     </div>
-                </div>
-
-            </div>
-
-        </div>
     </section>
 
 </div>
+@section Scripts{
+    <script>
+        $(document).on("click", "#btn_incluir", function () {
+            
+        })
+            .on("click", ".btn-alterar", function () {
+                alert("2");
+            })
+            .on("click", ".btn-alterar", function () {
+                alert("3");
+            })
+    </script>
+    }
 
