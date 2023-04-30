@@ -54,7 +54,7 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr>
+                            <tr data-id="@item.Id">
                                 <td>@item.Nome</td>
                                 <td>@{var ativo = (item.Ativo ? "SIM" : "NÃO");}@ativo</td>
                                 <td>
@@ -99,10 +99,14 @@
 </div>
 @section Scripts{
     <script>
-        $(document).on('click', '#btn_incluir', function () {
+        function abrir_form(dados) {
+            $('#txt_nome').val(dados.Nome);
+            $('#cbx_ativo').prop('checked', dados.ativo);
+
             var modal_cadastro = $('#modal_cadastro');
 
-            bootbox.dialog({
+
+             bootbox.dialog({
                 title: '@ViewBag.Title',
                 message: modal_cadastro
             })
@@ -114,9 +118,22 @@
             .on('hidden.bs.modal', function () {
                 modal_cadastro.hide().appendTo('body');
             });
+        }
+        $(document).on('click', '#btn_incluir', function () {
+            abrir_form({ id: 0, Nome: '', ativo: true });
+
         })
-        .on('click', '.btn-alterar', function () {
-            alert('2');
+            .on('click', '.btn-alterar', function () {
+                var btn = $(this),
+                    id = btn.closest('tr').attr('data-id'),
+                    url = '@Url.Action("RecuperarGrupoProduto", "Cadastro")',
+                    param = { 'id': id };
+
+                $.post(url, param, function (response) {
+                    if (response) {
+                        abrir_form(response);
+                    }
+                });
         })
         .on('click', '.btn-excluir', function () {
             alert('3');
