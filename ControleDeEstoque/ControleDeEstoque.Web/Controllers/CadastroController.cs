@@ -1,30 +1,30 @@
-﻿using ControleDeEstoque.Web.Models;
+﻿using ControleEstoque.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ControleDeEstoque.Web.Controllers
+namespace ControleEstoque.Web.Controllers
 {
     public class CadastroController : Controller
     {
-
-        // GET: Cadastro
         private static List<GrupoProdutoModel> _listaGrupoProduto = new List<GrupoProdutoModel>()
         {
-        new GrupoProdutoModel(){Id=1, Nome="livros", Ativo=true},
-        new GrupoProdutoModel(){Id=2, Nome="Mouses", Ativo=true},
-        new GrupoProdutoModel(){Id=3, Nome="Monitores", Ativo=false}
+            new GrupoProdutoModel() { Id=1, Nome="Livros", Ativo=true },
+            new GrupoProdutoModel() { Id=2, Nome="Mouses", Ativo=true },
+            new GrupoProdutoModel() { Id=3, Nome="Monitores", Ativo=false }
         };
+
         [Authorize]
         public ActionResult GrupoProduto()
         {
             return View(_listaGrupoProduto);
         }
+
         [HttpPost]
         [Authorize]
-        public ActionResult RecuperarGrupoProduto (int id)
+        public ActionResult RecuperarGrupoProduto(int id)
         {
             return Json(_listaGrupoProduto.Find(x => x.Id == id));
         }
@@ -41,6 +41,7 @@ namespace ControleDeEstoque.Web.Controllers
                 _listaGrupoProduto.Remove(registroBD);
                 ret = true;
             }
+
             return Json(ret);
         }
 
@@ -48,20 +49,40 @@ namespace ControleDeEstoque.Web.Controllers
         [Authorize]
         public ActionResult SalvarGrupoProduto(GrupoProdutoModel model)
         {
-            var registroBD = _listaGrupoProduto.Find(x => x.Id == model.Id);
-           
-            if(registroBD==null)
+            var resultado = "OK";
+            var mensagens = new List<string>();
+            var idSalvo = string.Empty;
+
+            if (!ModelState.IsValid)
             {
-                registroBD = model;
-                registroBD.Id = _listaGrupoProduto.Max(x => x.Id) + 1;
-                _listaGrupoProduto.Add(registroBD);
+                resultado = "AVISO";
+                mensagens = ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage).ToList();
             }
-            else 
+            else
             {
-                registroBD.Nome = model.Nome;
-                registroBD.Ativo = model.Ativo;
+                try
+                {
+                    var registroBD = _listaGrupoProduto.Find(x => x.Id == model.Id);
+
+                    if (registroBD == null)
+                    {
+                        registroBD = model;
+                        registroBD.Id = _listaGrupoProduto.Max(x => x.Id) + 1;
+                        _listaGrupoProduto.Add(registroBD);
+                    }
+                    else
+                    {
+                        registroBD.Nome = model.Nome;
+                        registroBD.Ativo = model.Ativo;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    resultado = "ERRO";
+                }
             }
-            return Json(registroBD);
+
+            return Json(new { Resultado = resultado, Mensagens = mensagens, IdSalvo = idSalvo });
         }
 
         [Authorize]
@@ -69,48 +90,57 @@ namespace ControleDeEstoque.Web.Controllers
         {
             return View();
         }
+
         [Authorize]
         public ActionResult LocalProduto()
         {
             return View();
         }
+
         [Authorize]
         public ActionResult UnidadeMedida()
         {
             return View();
         }
+
         [Authorize]
         public ActionResult Produto()
         {
             return View();
         }
+
         [Authorize]
         public ActionResult Pais()
         {
             return View();
         }
+
         [Authorize]
-        public ActionResult Provincia()
+        public ActionResult Estado()
         {
             return View();
         }
+
         [Authorize]
-        public ActionResult Municipio()
+        public ActionResult Cidade()
         {
             return View();
         }
+
         [Authorize]
         public ActionResult Fornecedor()
         {
             return View();
         }
+
         [Authorize]
         public ActionResult PerfilUsuario()
         {
             return View();
         }
+
         [Authorize]
-        public ActionResult Usuário()
+        public ActionResult Usuario()
         {
             return View();
         }
