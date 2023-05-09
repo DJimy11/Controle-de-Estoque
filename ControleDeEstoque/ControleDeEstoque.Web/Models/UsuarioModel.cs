@@ -13,7 +13,7 @@ namespace ControleDeEstoque.Web.Models
             var ret = false;
             using (var conexao = new SqlConnection())
             {
-                conexao.ConnectionString = @"Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=controle_estoque;Data Source=DESKTOP-ITD9051";
+                conexao.ConnectionString = @"Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=controle_estoque;Data Source=DENILSON-RIBEIR\SQLEXPRESS";
                 conexao.Open();
                 using (var comando = new SqlCommand())
                 {
