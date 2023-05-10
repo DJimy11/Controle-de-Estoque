@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace ControleDeEstoque.Web.Models
 {
@@ -13,7 +14,7 @@ namespace ControleDeEstoque.Web.Models
             var ret = false;
             using (var conexao = new SqlConnection())
             {
-                conexao.ConnectionString = @"Integrated Security=SSPI;Persist Security Info=False;User ID=admin;Initial Catalog=controle_estoque;Data Source=DUMILDE\DUMILDE";
+                conexao.ConnectionString = ConfigurationManager.ConnectionStrings["principal"].ConnectionString;
                 conexao.Open();
                 using (var comando = new SqlCommand())
                 {
