@@ -9,7 +9,8 @@ namespace ControleDeEstoque.Web
 {
     public static class CriptoHelper
     {
-        public static string HashMD5(string val) {
+        public static string HashMD5(string val)
+        {
 
             var bytes = Encoding.ASCII.GetBytes(val);
             var md5 = MD5.Create();

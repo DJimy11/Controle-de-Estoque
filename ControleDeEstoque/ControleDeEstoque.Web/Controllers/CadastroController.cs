@@ -1,4 +1,4 @@
-﻿using ControleEstoque.Web.Models;
+﻿using ControleDeEstoque.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,14 +26,14 @@ namespace ControleEstoque.Web.Controllers
         [Authorize]
         public ActionResult RecuperarGrupoProduto(int id)
         {
-            return Json(GrupoProdutoModel.RecuperarPeloId (id));
+            return Json(GrupoProdutoModel.RecuperarPeloId(id));
         }
 
         [HttpPost]
         [Authorize]
         public ActionResult ExcluirGrupoProduto(int id)
         {
-            return Json(GrupoProdutoModel.RecuperarPeloId(id));
+            return Json(GrupoProdutoModel.ExcluirPeloId(id));
         }
 
         [HttpPost]
@@ -54,8 +54,7 @@ namespace ControleEstoque.Web.Controllers
                 try
                 {
                     var id = model.Salvar();
-
-                    if (id > 0) 
+                    if (id > 0)
                     {
                         idSalvo = id.ToString();
                     }
