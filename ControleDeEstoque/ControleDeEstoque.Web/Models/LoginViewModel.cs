@@ -3,23 +3,25 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using ControleDeEstoque.Web;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Data;
 
-namespace ControleDeEstoque.Web.Models
+namespace ControleEstoque.Web.Models
 {
     public class LoginViewModel
     {
-        [Required]
-         [Display(Name = "Usuario: ")]
+        [Required(ErrorMessage = "Informe o usuário")]
+        [Display(Name = "Usuário:")]
         public string Usuario { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Informe a senha")]
         [DataType(DataType.Password)]
         [Display(Name = "Senha:")]
         public string Senha { get; set; }
 
-
         [Display(Name = "Lembrar Me")]
         public bool LembrarMe { get; set; }
-      
     }
 }

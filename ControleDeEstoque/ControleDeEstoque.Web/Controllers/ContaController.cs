@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using ControleDeEstoque.Web.Models;
+using ControleEstoque.Web.Models;
 using System.Web.Mvc;
 using System.Web.Security;
-using ControleDeEstoque.Web.Models;
 
-namespace ControleDeEstoque.Web.Controllers
+
+namespace ControleEstoque.Web.Controllers
 {
     public class ContaController : Controller
     {
@@ -16,6 +14,7 @@ namespace ControleDeEstoque.Web.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
+
         [HttpPost]
         [AllowAnonymous]
         public ActionResult Login(LoginViewModel login, string returnUrl)
@@ -25,26 +24,24 @@ namespace ControleDeEstoque.Web.Controllers
                 return View(login);
             }
 
-            var achou = UsuarioModel.ValidarUsuario(login.Usuario, login.Senha);
+            var usuario = UsuarioModel.ValidarUsuario(login.Usuario, login.Senha);
 
-            if (achou)
+            if (usuario != null)
             {
-                FormsAuthentication.SetAuthCookie(login.Usuario, login.LembrarMe);
+                FormsAuthentication.SetAuthCookie(usuario.Nome, login.LembrarMe);
                 if (Url.IsLocalUrl(returnUrl))
                 {
                     return Redirect(returnUrl);
                 }
                 else
                 {
-                   return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");
                 }
             }
-
             else
             {
                 ModelState.AddModelError("", "Login inválido.");
             }
-
 
             return View(login);
         }

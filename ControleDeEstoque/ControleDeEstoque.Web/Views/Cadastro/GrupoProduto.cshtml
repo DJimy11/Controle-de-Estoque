@@ -3,11 +3,11 @@
     ViewBag.Title = "Cadastro de Grupos de Produtos";
 }
 <style>
-    #grid_cadastro > thead > th:nth-child(2) {
+    #grid_cadastro > thead > tr th:nth-child(2) {
         width: 110px;
     }
 
-    #grid_cadastro > thead > th:nth-child(3) {
+    #grid_cadastro > thead > tr th:nth-child(3) {
         width: 200px;
     }
 
@@ -16,13 +16,8 @@
         margin: 0 auto;
     }
 
-    #modal_cadastro {
-        width: 70%;
-        margin: 0 auto;
-    }
-
     #cadastro_cabecalho {
-        border-bottom: 1px #addddd solid;
+        border-bottom: 1px #dddddd solid;
     }
 
     #cadastro_conteudo {
@@ -110,6 +105,7 @@
             data.__RequestVerificationToken = $('[name=__RequestVerificationToken]').val();
             return data;
         }
+
         function abrir_form(dados) {
             $('#id_cadastro').val(dados.Id);
             $('#txt_nome').val(dados.Nome);
@@ -177,11 +173,11 @@
                 buttons: {
                     confirm: {
                         label: 'Sim',
-                        className: 'btn-success'
+                        className: 'btn-danger'
                     },
                     cancel: {
                         label: 'Não',
-                        className: 'btn-danger'
+                        className: 'btn-success'
                     }
                 },
                 callback: function (result) {
