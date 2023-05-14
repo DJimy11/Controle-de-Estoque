@@ -11,7 +11,6 @@ namespace ControleDeEstoque.Web
     {
         public static string HashMD5(string val)
         {
-
             var bytes = Encoding.ASCII.GetBytes(val);
             var md5 = MD5.Create();
             var hash = md5.ComputeHash(bytes);
