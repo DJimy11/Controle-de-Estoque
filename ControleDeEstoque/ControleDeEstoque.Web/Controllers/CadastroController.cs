@@ -82,11 +82,10 @@ namespace ControleEstoque.Web.Controllers
 
         #endregion
 
-        #region Grupos de produtos
-
         [Authorize]
         public ActionResult GrupoProduto()
         {
+            ViewBag.ListaTamPag = new SelectList(new int[] { _quantMaxLinhasPorPagina, 10, 15, 20 }, _quantMaxLinhasPorPagina);
             ViewBag.QuantMaxLinhasPorPagina = _quantMaxLinhasPorPagina;
             ViewBag.PaginaAtual = 1;
 
@@ -101,9 +100,9 @@ namespace ControleEstoque.Web.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public JsonResult GrupoProdutoPagina(int pagina)
+        public JsonResult GrupoProdutoPagina(int pagina, int tamPag)
         {
-            var lista = GrupoProdutoModel.RecuperarLista(pagina, _quantMaxLinhasPorPagina);
+            var lista = GrupoProdutoModel.RecuperarLista(pagina, tamPag);
 
             return Json(lista);
         }
@@ -160,8 +159,6 @@ namespace ControleEstoque.Web.Controllers
 
             return Json(new { Resultado = resultado, Mensagens = mensagens, IdSalvo = idSalvo });
         }
-
-        #endregion
 
         [Authorize]
         public ActionResult MarcaProduto()
