@@ -5,20 +5,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
-namespace ControleEstoque.Web.Controllers
+namespace ControleDeEstoque.Web.Controllers
 {
-    public class CadastroController : Controller
+    public class CadUsuarioController : Controller
     {
         private const int _quantMaxLinhasPorPagina = 5;
+        private const string _senhaPadrao = "{$127;$188}";
 
         [Authorize]
-        public ActionResult GrupoProduto()
+        public ActionResult Index()
         {
+            ViewBag.SenhaPadrao = _senhaPadrao;
             ViewBag.ListaTamPag = new SelectList(new int[] { _quantMaxLinhasPorPagina, 10, 15, 20 }, _quantMaxLinhasPorPagina);
             ViewBag.QuantMaxLinhasPorPagina = _quantMaxLinhasPorPagina;
             ViewBag.PaginaAtual = 1;
 
-            var lista = GrupoProdutoModel.RecuperarLista(ViewBag.PaginaAtual, _quantMaxLinhasPorPagina);
+            var lista = UsuarioModel.RecuperarLista(ViewBag.PaginaAtual, _quantMaxLinhasPorPagina);
             var quant = GrupoProdutoModel.RecuperarQuantidade();
             var difQuantPaginas = (quant % ViewBag.QuantMaxLinhasPorPagina) > 0 ? 1 : 0;
             ViewBag.QuantPaginas = (quant / ViewBag.QuantMaxLinhasPorPagina) + difQuantPaginas;
@@ -29,9 +31,9 @@ namespace ControleEstoque.Web.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public JsonResult GrupoProdutoPagina(int pagina, int tamPag)
+        public JsonResult UsuarioPagina(int pagina, int tamPag)
         {
-            var lista = GrupoProdutoModel.RecuperarLista(pagina, tamPag);
+            var lista = UsuarioModel.RecuperarLista(pagina, tamPag);
 
             return Json(lista);
         }
@@ -39,23 +41,23 @@ namespace ControleEstoque.Web.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public JsonResult RecuperarGrupoProduto(int id)
+        public ActionResult RecuperarUsuario(int id)
         {
-            return Json(GrupoProdutoModel.RecuperarPeloId(id));
+            return Json(UsuarioModel.RecuperarPeloId(id));
         }
 
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public JsonResult ExcluirGrupoProduto(int id)
+        public ActionResult ExcluirUsuario(int id)
         {
-            return Json(GrupoProdutoModel.ExcluirPeloId(id));
+            return Json(UsuarioModel.ExcluirPeloId(id));
         }
 
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public JsonResult SalvarGrupoProduto(GrupoProdutoModel model)
+        public ActionResult SalvarUsuario(UsuarioModel model)
         {
             var resultado = "OK";
             var mensagens = new List<string>();
@@ -70,6 +72,11 @@ namespace ControleEstoque.Web.Controllers
             {
                 try
                 {
+                    if (model.Senha == _senhaPadrao)
+                    {
+                        model.Senha = "";
+                    }
+
                     var id = model.Salvar();
                     if (id > 0)
                     {
@@ -87,60 +94,6 @@ namespace ControleEstoque.Web.Controllers
             }
 
             return Json(new { Resultado = resultado, Mensagens = mensagens, IdSalvo = idSalvo });
-        }
-
-        [Authorize]
-        public ActionResult MarcaProduto()
-        {
-            return View();
-        }
-
-        [Authorize]
-        public ActionResult LocalProduto()
-        {
-            return View();
-        }
-
-        [Authorize]
-        public ActionResult UnidadeMedida()
-        {
-            return View();
-        }
-
-        [Authorize]
-        public ActionResult Produto()
-        {
-            return View();
-        }
-
-        [Authorize]
-        public ActionResult Pais()
-        {
-            return View();
-        }
-
-        [Authorize]
-        public ActionResult Estado()
-        {
-            return View();
-        }
-
-        [Authorize]
-        public ActionResult Cidade()
-        {
-            return View();
-        }
-
-        [Authorize]
-        public ActionResult Fornecedor()
-        {
-            return View();
-        }
-
-        [Authorize]
-        public ActionResult PerfilUsuario()
-        {
-            return View();
         }
     }
 }
