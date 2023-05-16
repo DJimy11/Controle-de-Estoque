@@ -36,3 +36,11 @@ textarea {
 .invisivel{
     display: none;
 }
+
+.modal{
+    overflow: hidden;
+}
+
+body.modal-open, .modal-open .navbar-fixed-top, .modal-open .navbar-fixed-botton{
+    margin-right: 0px;
+}
