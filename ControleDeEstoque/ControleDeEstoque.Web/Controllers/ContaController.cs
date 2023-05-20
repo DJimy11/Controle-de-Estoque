@@ -1,7 +1,5 @@
 ﻿using ControleDeEstoque.Web.Models;
 using ControleEstoque.Web.Models;
-using System;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -10,8 +8,6 @@ namespace ControleEstoque.Web.Controllers
 {
     public class ContaController : Controller
     {
-        private string tiket;
-
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -32,15 +28,7 @@ namespace ControleEstoque.Web.Controllers
 
             if (usuario != null)
             {
-                // FormsAuthentication.SetAuthCookie(usuario.Nome, login.LembrarMe);
-               var tiket= FormsAuthentication.Encrypt(new FormsAuthenticationTicket(
-                   1, usuario.Nome,DateTime.Now,DateTime.Now.AddHours(12),login.LembrarMe,"Operador"));
-                var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, tiket);
-                Response.Cookies.Add(cookie);
-
-
-
-
+                FormsAuthentication.SetAuthCookie(usuario.Nome, login.LembrarMe);
                 if (Url.IsLocalUrl(returnUrl))
                 {
                     return Redirect(returnUrl);
