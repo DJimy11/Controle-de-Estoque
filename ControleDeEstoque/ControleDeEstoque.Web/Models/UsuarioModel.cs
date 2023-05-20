@@ -1,5 +1,4 @@
-﻿using ControleDeEstoque.Web;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Configuration;
@@ -7,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using ControleDeEstoque.Web;
 
 namespace ControleEstoque.Web.Models
 {
@@ -45,7 +45,7 @@ namespace ControleEstoque.Web.Models
                             Id = (int)reader["id"],
                             Login = (string)reader["login"],
                             Senha = (string)reader["senha"],
-                            Nome = (string)reader["nome"],
+                            Nome = (string)reader["nome"]
                         };
                     }
                 }
@@ -73,7 +73,7 @@ namespace ControleEstoque.Web.Models
             return ret;
         }
 
-        public static List<UsuarioModel> RecuperarLista(int pagina, int tamPagina)
+        public static List<UsuarioModel> RecuperarLista(int pagina = -1, int tamPagina = -1)
         {
             var ret = new List<UsuarioModel>();
 
@@ -86,9 +86,18 @@ namespace ControleEstoque.Web.Models
                     var pos = (pagina - 1) * tamPagina;
 
                     comando.Connection = conexao;
-                    comando.CommandText = string.Format(
-                        "select * from usuario order by nome offset {0} rows fetch next {1} rows only",
-                        pos > 0 ? pos - 1 : 0, tamPagina);
+
+                    if (pagina == -1 || tamPagina == -1)
+                    {
+                        comando.CommandText = "select * from usuario order by nome";
+                    }
+                    else
+                    {
+                        comando.CommandText = string.Format(
+                            "select * from usuario order by nome offset {0} rows fetch next {1} rows only",
+                            pos > 0 ? pos - 1 : 0, tamPagina);
+                    }
+
                     var reader = comando.ExecuteReader();
                     while (reader.Read())
                     {
@@ -96,7 +105,7 @@ namespace ControleEstoque.Web.Models
                         {
                             Id = (int)reader["id"],
                             Nome = (string)reader["nome"],
-                            Login = (string)reader["login"],
+                            Login = (string)reader["login"]
                         });
                     }
                 }
@@ -127,7 +136,7 @@ namespace ControleEstoque.Web.Models
                         {
                             Id = (int)reader["id"],
                             Nome = (string)reader["nome"],
-                            Login = (string)reader["login"],
+                            Login = (string)reader["login"]
                         };
                     }
                 }

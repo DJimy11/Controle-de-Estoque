@@ -1,18 +1,19 @@
-﻿using System;
+﻿using ControleEstoque.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
-namespace ControleDeEstoque.Web.Controllers.Cadastro
+namespace ControleEstoque.Web.Controllers.Cadastro
 {
     [Authorize(Roles = "Gerente")]
-    public class cadPerfilController : Controller
+    public class CadPerfilController : Controller
     {
         private const int _quantMaxLinhasPorPagina = 5;
 
         public ActionResult Index()
         {
+            ViewBag.ListaUsuario = UsuarioModel.RecuperarLista();
             ViewBag.ListaTamPag = new SelectList(new int[] { _quantMaxLinhasPorPagina, 10, 15, 20 }, _quantMaxLinhasPorPagina);
             ViewBag.QuantMaxLinhasPorPagina = _quantMaxLinhasPorPagina;
             ViewBag.PaginaAtual = 1;
@@ -39,7 +40,9 @@ namespace ControleDeEstoque.Web.Controllers.Cadastro
         [ValidateAntiForgeryToken]
         public JsonResult RecuperarPerfil(int id)
         {
-            return Json(PerfilModel.RecuperarPeloId(id));
+            var ret = PerfilModel.RecuperarPeloId(id);
+            ret.CarregarUsuarios();
+            return Json(ret);
         }
 
         [HttpPost]
