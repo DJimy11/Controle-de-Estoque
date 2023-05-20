@@ -7,12 +7,12 @@ using System.Web.Mvc;
 
 namespace ControleDeEstoque.Web.Controllers
 {
+    [Authorize(Roles = "Gerente")]
     public class CadUsuarioController : Controller
     {
         private const int _quantMaxLinhasPorPagina = 5;
         private const string _senhaPadrao = "{$127;$188}";
 
-        [Authorize]
         public ActionResult Index()
         {
             ViewBag.SenhaPadrao = _senhaPadrao;
@@ -29,7 +29,6 @@ namespace ControleDeEstoque.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         [ValidateAntiForgeryToken]
         public JsonResult UsuarioPagina(int pagina, int tamPag)
         {
@@ -39,7 +38,6 @@ namespace ControleDeEstoque.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult RecuperarUsuario(int id)
         {
@@ -47,7 +45,6 @@ namespace ControleDeEstoque.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult ExcluirUsuario(int id)
         {
@@ -55,7 +52,6 @@ namespace ControleDeEstoque.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult SalvarUsuario(UsuarioModel model)
         {
