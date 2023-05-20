@@ -30,7 +30,7 @@ namespace ControleDeEstoque.Web.Models
                 {
                     comando.Connection = conexao;
                     comando.CommandText = "select count(*) from grupo_produto";
-                   ret = (int)comando.ExecuteScalar();
+                    ret = (int)comando.ExecuteScalar();
                 }
             }
 
@@ -146,7 +146,7 @@ namespace ControleDeEstoque.Web.Models
 
                         comando.Parameters.Add("@nome", SqlDbType.VarChar).Value = this.Nome;
                         comando.Parameters.Add("@ativo", SqlDbType.VarChar).Value = (this.Ativo ? 1 : 0);
-                        
+
                         ret = (int)comando.ExecuteScalar();
                     }
                     else
@@ -154,7 +154,7 @@ namespace ControleDeEstoque.Web.Models
                         comando.CommandText = "update grupo_produto set nome=@nome, ativo=@ativo where id = @id";
 
 
-                             comando.Parameters.Add("@nome", SqlDbType.VarChar).Value = this.Nome;
+                        comando.Parameters.Add("@nome", SqlDbType.VarChar).Value = this.Nome;
                         comando.Parameters.Add("@ativo", SqlDbType.VarChar).Value = (this.Ativo ? 1 : 0);
                         comando.Parameters.Add("@id", SqlDbType.Int).Value = this.Id;
                         if (comando.ExecuteNonQuery() > 0)
