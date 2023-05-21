@@ -27,14 +27,14 @@ function abrir_form(dados) {
         title: 'Cadastro de ' + tituloPagina,
         message: modal_cadastro
     })
-    .on('shown.bs.modal', function () {
-        modal_cadastro.show(0, function () {
-            set_focus_form();
+        .on('shown.bs.modal', function () {
+            modal_cadastro.show(0, function () {
+                set_focus_form();
+            });
+        })
+        .on('hidden.bs.modal', function () {
+            modal_cadastro.hide().appendTo('body');
         });
-    })
-    .on('hidden.bs.modal', function () {
-        modal_cadastro.hide().appendTo('body');
-    });
 }
 
 function criar_linha_grid(dados) {
@@ -89,6 +89,11 @@ $(document).on('click', '#btn_incluir', function () {
                     $.post(url, add_anti_forgery_token(param), function (response) {
                         if (response) {
                             tr.remove();
+                            var quant = $('#grid_cadastro > tbody > tr').length;
+                            if (quant == 0) {
+                                $('#grid_cadastro').addClass('invisivel');
+                                $('#mensagem_grid').removeClass('invisivel');
+                            }
                         }
                     });
                 }
@@ -97,7 +102,7 @@ $(document).on('click', '#btn_incluir', function () {
     })
     .on('click', '#btn_confirmar', function () {
         var btn = $(this),
-            url = url_corfirmar,
+            url = url_confirmar,
             param = get_dados_form();
 
         $.post(url, add_anti_forgery_token(param), function (response) {
@@ -108,6 +113,8 @@ $(document).on('click', '#btn_incluir', function () {
                         linha = criar_linha_grid(param);
 
                     table.append(linha);
+                    $('#grid_cadastro').removeClass('invisivel');
+                    $('#mensagem_grid').addClass('invisivel');
                 }
                 else {
                     var linha = $('#grid_cadastro').find('tr[data-id=' + param.Id + ']').find('td');
@@ -154,7 +161,7 @@ $(document).on('click', '#btn_incluir', function () {
         var ddl = $(this),
             tamPag = ddl.val(),
             pagina = 1,
-            url = url_tam_page_change,
+            url = url_tam_pag_change,
             param = { 'pagina': pagina, 'tamPag': tamPag };
 
         $.post(url, add_anti_forgery_token(param), function (response) {

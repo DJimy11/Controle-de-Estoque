@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿﻿
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,7 +7,6 @@
     <title>@ViewBag.Title - Controle de Estoque</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <link href="~/Content/sweetalert2.min.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -29,18 +29,18 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Grupos de Produtos", "Index", "CadGrupoProduto")</li>
-                                <li>@Html.ActionLink("Marcas de Produtos", "MarcaProduto", "Cadastro")</li>
-                                <li>@Html.ActionLink("Locais de Armazenamento", "LocalProduto", "Cadastro")</li>
-                                <li>@Html.ActionLink("Unidades de Medida", "Index", "CadUnidadeMedida")</li>
+                                <li>@Html.ActionLink("Grupos de produtos", "Index", "CadGrupoProduto")</li>
+                                <li>@Html.ActionLink("Marcas de produtos", "Index", "CadMarcaProduto")</li>
+                                <li>@Html.ActionLink("Locais de armazenamento", "Index", "CadLocalArmazenamento")</li>
+                                <li>@Html.ActionLink("Unidades de medida", "Index", "CadUnidadeMedida")</li>
                                 <li>@Html.ActionLink("Produtos", "Produto", "Cadastro")</li>
                                 <li class="nav-divider"></li>
                                 <li>@Html.ActionLink("Países", "Pais", "Cadastro")</li>
-                                <li>@Html.ActionLink("Províncias", "Provincia", "Cadastro")</li>
-                                <li>@Html.ActionLink("Municípios", "Municipio", "Cadastro")</li>
+                                <li>@Html.ActionLink("Estados", "Estado", "Cadastro")</li>
+                                <li>@Html.ActionLink("Cidades", "Cidade", "Cadastro")</li>
                                 <li>@Html.ActionLink("Fornecedores", "Fornecedor", "Cadastro")</li>
                                 <li class="nav-divider"></li>
-                                <li>@Html.ActionLink("Perfis de Usuário", "Index", "cadPerfil")</li>
+                                <li>@Html.ActionLink("Perfis de Usuários", "Index", "CadPerfil")</li>
                                 <li>@Html.ActionLink("Usuários", "Index", "CadUsuario")</li>
                             </ul>
                         </li>
@@ -73,7 +73,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>@Html.ActionLink("Perdas por mês", "PerdaMes", "Grafico")</li>
-                                <li>@Html.ActionLink("Entradas vs saídas por mês", "EntradaSaidaMes", "Grafico")</li>
+                                <li>@Html.ActionLink("Entradas vs saídas por mês", "EntradaSaidaMesa", "Grafico")</li>
                             </ul>
                         </li>
                     </ul>
@@ -81,15 +81,7 @@
                     {
                         <ul class="nav navbar-nav navbar-right">
                             <li>@Html.ActionLink("Sobre", "Sobre", "Home")</li>
-                            <li>
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    @User.Identity.Name
-                                    <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>@Html.ActionLink("Alteração de senha", "AlterarSenhaUsuario", "Conta")</li>
-                                </ul>
-                            </li>
+                            <li><a href="#">Olá @User.Identity.Name</a></li>
                             <li><a href="javascript:document.getElementById('logoffForm').submit()">Sair</a></li>
                         </ul>
                     }
@@ -113,7 +105,6 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    <script src="~/Scripts/sweetalert2.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
