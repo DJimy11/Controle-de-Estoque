@@ -1,10 +1,12 @@
-﻿using ControleEstoque.Web.Models;
+﻿using ControleDeEstoque.Web.Models;
+using ControleEstoque.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
-namespace ControleEstoque.Web.Controllers
+namespace ControleDeEstoque.Web.Controllers.Cadastro
 {
     [Authorize(Roles = "Gerente,Administrativo,Operador")]
     public class CadMarcaProdutoController : Controller
@@ -39,8 +41,7 @@ namespace ControleEstoque.Web.Controllers
         [ValidateAntiForgeryToken]
         public JsonResult RecuperarMarcaProduto(int id)
         {
-            return Json(false);
-            //return Json(MarcaProdutoModel.RecuperarPeloId(id));
+            return Json(MarcaProdutoModel.RecuperarPeloId(id));
         }
 
         [HttpPost]
