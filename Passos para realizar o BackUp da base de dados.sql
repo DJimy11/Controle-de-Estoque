@@ -1,0 +1,7 @@
+-- Passos para fazer o BackUp
+-- 0 Tire o Aquivo .bak do repositório e coloca em um PenDrive ou no Disco Local C, crie uma paste Backups e coloca nele.
+-- 1 Eliminar a base de dados com o mesmo nome já existente
+-- 2 Clicar com o botão direito do mouse em Banco de Dados >> Restaurar banco de dados
+-- 3 Marcar a opção Dispositivo e clicar em [...]
+-- 4 Clicar em Adicionar
+-- 5 Busca o arquivo na pasta Backup que você criou no Disco Local e depois é só OK >> OK >> OK
