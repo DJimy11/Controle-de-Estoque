@@ -21,11 +21,6 @@ function set_focus_form() {
     $('#txt_nome').focus();
 }
 
-function set_dados_grid(dados) {
-    return '<td>' + dados.Nome + '</td>' +
-        '<td>' + (dados.Ativo ? 'SIM' : 'NÃO') + '</td>';
-}
-
 function get_dados_inclusao() {
     return {
         Id: 0,
@@ -55,11 +50,12 @@ function get_lista_usuarios_marcados() {
 
     lista_usuario.find('input[type=checkbox]').each(function (index, input) {
         var cbx = $(input),
-            marcado = cbx.is(':checked')
+            marcado = cbx.is(':checked');
 
         if (marcado) {
             ids.push(parseInt(cbx.attr('data-id-usuario')));
         }
     });
+
     return ids;
 }

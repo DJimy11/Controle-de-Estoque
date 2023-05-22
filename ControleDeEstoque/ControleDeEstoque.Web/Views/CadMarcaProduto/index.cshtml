@@ -1,7 +1,8 @@
-﻿﻿@model List<ControleEstoque.Web.Models.MarcaProdutoModel>
+﻿@model List<ControleEstoque.Web.Models.MarcaProdutoModel>
 @{
     Layout = "~/Views/Shared/_Cadastro.cshtml";
     ViewBag.Title = "Marca de Produtos";
+    ViewBag.Lista = Model;
     ViewBag.Lista = Model;
 }
 
@@ -14,33 +15,6 @@
     <th>Nome</th>
     <th>Ativo</th>
     <th>Ação</th>
-}
-
-@section LinhaGrid {
-    @{
-        var linha = 0;
-        foreach (var item in Model)
-        {
-            linha++;
-            if (linha <= ViewBag.QuantMaxLinhasPorPagina)
-            {
-                var ativo = (item.Ativo ? "SIM" : "NÃO");
-
-                <tr data-id="@item.Id">
-                    <td>@item.Nome</td>
-                    <td>@ativo</td>
-                    <td>
-                        <a class="btn btn-primary btn-alterar" role="button"><i class="glyphicon glyphicon-pencil"></i> Alterar</a>
-                        <a class="btn btn-danger btn-excluir" role="button"><i class="glyphicon glyphicon-trash"></i> Excluir</a>
-                    </td>
-                </tr>
-            }
-            else
-            {
-                break;
-            }
-        }
-    }
 }
 
 @section CamposCadastro {
@@ -69,6 +43,33 @@
         var url_page_click = '@Url.Action("MarcaProdutoPagina", "CadMarcaProduto")';
         var url_tam_pag_change = '@Url.Action("MarcaProdutoPagina", "CadMarcaProduto")';
         var url_alterar = '@Url.Action("RecuperarMarcaProduto", "CadMarcaProduto")';
+        var linhas = [];
+
+        @{
+            var linha = 0;
+            foreach (var item in Model)
+            {
+                linha++;
+                if (linha <= ViewBag.QuantMaxLinhasPorPagina)
+                {
+                    @:linhas.push(@Html.Raw(Json.Encode(item)));
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+    </script>
+    <script id="template-grid" type="x-tmpl-mustache">
+        <tr data-id="{{ Id }}">
+            <td>{{ Nome }}</td>
+            <td>{{ #Ativo }}SIM{{ /Ativo }}{{ ^Ativo }}NÃO{{ /Ativo }}</td>
+            <td>
+                <a class="btn btn-primary btn-alterar" role="button"><i class="glyphicon glyphicon-pencil"></i> Alterar</a>
+                <a class="btn btn-danger btn-excluir" role="button"><i class="glyphicon glyphicon-trash"></i> Excluir</a>
+            </td>
+        </tr>
     </script>
     <script src="~/Scripts/Cadastro/MarcaProduto.js"></script>
 }
