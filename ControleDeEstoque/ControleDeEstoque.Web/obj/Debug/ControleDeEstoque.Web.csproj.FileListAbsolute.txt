@@ -691,3 +691,5 @@ C:\Users\TEIXEIRA ARNALDO\Documents\Controle-de-Estoque\ControleDeEstoque\Contro
 C:\Users\TEIXEIRA ARNALDO\Documents\Controle-de-Estoque\ControleDeEstoque\ControleDeEstoque.Web\obj\Debug\ControleDeEstoque.Web.csproj.CopyComplete
 C:\Users\TEIXEIRA ARNALDO\Documents\Controle-de-Estoque\ControleDeEstoque\ControleDeEstoque.Web\obj\Debug\ControleDeEstoque.Web.dll
 C:\Users\TEIXEIRA ARNALDO\Documents\Controle-de-Estoque\ControleDeEstoque\ControleDeEstoque.Web\obj\Debug\ControleDeEstoque.Web.pdb
+C:\Users\domil\Documents\Material da UTANGA\Estágio de Software\Controle-de-Estoque\ControleDeEstoque\ControleDeEstoque.Web\bin\Dapper.dll
+C:\Users\domil\Documents\Material da UTANGA\Estágio de Software\Controle-de-Estoque\ControleDeEstoque\ControleDeEstoque.Web\bin\Dapper.xml
